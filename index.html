@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="anya"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>password generator</title>
+<style>
+:root {
+ --red:#fa3c3c;
+ --dark:525252;
+ --grey:#d6d6d6;
+}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+body {
+font-family:sans-serif;
+font-weight:350;
+line-height:1.2;
+font-size:1em;
+background:linear-gradient(52deg, rgba(163, 163, 163, 0.09) 0%, rgba(163, 163, 163, 0.09) 33.3%,rgba(100, 100, 100, 0.09) 33.3%, rgba(100, 100, 100, 0.09) 66.6%,rgba(162, 162, 162, 0.09) 66.6%, rgba(162, 162, 162, 0.09) 99%),linear-gradient(258deg, rgba(193, 193, 193, 0.06) 0%, rgba(193, 193, 193, 0.06) 33.3%,rgba(169, 169, 169, 0.06) 33.3%, rgba(169, 169, 169, 0.06) 66.6%,rgba(92, 92, 92, 0.06) 66.6%, rgba(92, 92, 92, 0.06) 99%),linear-gradient(129deg, rgba(45, 45, 45, 0.03) 0%, rgba(45, 45, 45, 0.03) 33.3%,rgba(223, 223, 223, 0.03) 33.3%, rgba(223, 223, 223, 0.03) 66.6%,rgba(173, 173, 173, 0.03) 66.6%, rgba(173, 173, 173, 0.03) 99%),linear-gradient(280deg, rgba(226, 226, 226, 0.06) 0%, rgba(226, 226, 226, 0.06) 33.3%,rgba(81, 81, 81, 0.06) 33.3%, rgba(81, 81, 81, 0.06) 66.6%,rgba(186, 186, 186, 0.06) 66.6%, rgba(186, 186, 186, 0.06) 99%),linear-gradient(85deg, rgba(225, 225, 225, 0.04) 0%, rgba(225, 225, 225, 0.04) 33.3%,rgba(95, 95, 95, 0.04) 33.3%, rgba(95, 95, 95, 0.04) 66.6%,rgba(39, 39, 39, 0.04) 66.6%, rgba(39, 39, 39, 0.04) 99%),linear-gradient(128deg, rgba(184, 184, 184, 0.06) 0%, rgba(184, 184, 184, 0.06) 33.3%,rgba(0, 0, 0, 0.06) 33.3%, rgba(0, 0, 0, 0.06) 66.6%,rgba(140, 140, 140, 0.06) 66.6%, rgba(140, 140, 140, 0.06) 99.89999999999999%),linear-gradient(323deg, rgba(40, 40, 40, 0.07) 0%, rgba(40, 40, 40, 0.07) 33.3%,rgba(214, 214, 214, 0.07) 33.3%, rgba(214, 214, 214, 0.07) 66.6%,rgba(190, 190, 190, 0.07) 66.6%, rgba(190, 190, 190, 0.07) 99.89999999999999%),linear-gradient(61deg, rgba(230, 230, 230, 0) 0%, rgba(230, 230, 230, 0) 33.3%,rgba(241, 241, 241, 0) 33.3%, rgba(241, 241, 241, 0) 66.6%,rgba(55, 55, 55, 0) 66.6%, rgba(55, 55, 55, 0) 99%),linear-gradient(0deg, #2625e3,#0bbaef);
+min-height:100vh;
+}
+a,a:hover {
+text-decoration:none;
+}
+.container {
+ width:100%;
+ max-width:520px;
+ margin-left:auto;
+ margin-right:auto;
+ padding:1em;
+}
+.mt-4{
+ margin-top:4em;
+}
+.password_wrapper {
+ width:100%;
+ padding:1em;
+ background:#fff;
+ border-radius:5px;
+ box-shadow:0 0 3px rgba(0,0,0,0.2);
+ margin-top:4em;
+}
+.title {
+ text-align:center;
+ color:var(--red);
+ text-transform:uppercase;
+ font-weight:500;
+ margin-top:10px;
+ margin-bottom:1em;
+}
+.result-box {
+ width:100%;
+ height:45px;
+ display:flex;
+ border:1px solid var(--red);
+ border-radius:2px;
+ margin-bottom:10px;
+}
+.result {
+ flex:1;
+ display:flex;
+ align-items: center;
+ padding:0 1em;
+ overflow:scroll;
+}
+.result span {
+ transition:0.3s;
+}
+.btn-copy{
+ outline:none;
+ border:none;
+ background:var(--red);
+ color:#fff;
+ height:100%;
+ width:50px;
+ cursor:pointer;
+ font-size:16px;
+}
+.options-box{
+ width:100%; 
+ margin-bottom:1em;
+ margin-top:5px;
+}
+.option {
+ width:100%;
+ display:flex;
+ justify-content: space-between;
+ padding:7px 2px;
+}
+.option label {
+ color:var(--dark);
+}
+.pass_lenght {
+ outline:none;
+ border:1px solid var(--red);
+ padding:2px;
+ width:50px;
+}
+
+.btn-group {
+ width:100%;
+ margin-bottom:10px;
+}
+.generator-btn {
+ display:block;
+ width:100%;
+ outline:none;
+ border:none;
+ background:var(--red);
+ border-radius:4px;
+ height:43px;
+ color:#fff;
+ cursor:pointer; 
+ font-size:16px;
+ text-transform:uppercase;
+ letter-spacing:1px;
+}
+.sub-btn {
+  
+ display:block;
+ width:100%;
+ outline:none;
+ border:none;
+ background-color:#777;
+ border-radius:4px;
+ height:43px;
+ color:#fff;
+ cursor:pointer; 
+ font-size:16px;
+ text-transform:uppercase;
+ letter-spacing:1px;
+} 
+} 
+.error {
+ display:inline-block;
+ color:var(--red);
+ font-size:15px;
+ font-weight:500;
+ padding-left:2px;
+}
+.preloader {
+ position:fixed;
+ top:0;
+ left:0;
+ height:100vh;
+ width:100%;
+ display:none;
+ justify-content: center;
+ align-items: center;
+ background:rgba(255,255,255,0.5);
+ z-index:9;
+}
+.preloader.show{
+ display:flex;
+}
+.preloader svg{
+ position:relative;
+ height:70px;
+ width:70px;
+ animation: rotate 2s linear infinite;
+}
+.preloader svg circle{
+ width:100%;
+ height:100%;
+ fill:none;
+ stroke-width:5px;
+ stroke:#fa3c3c;
+ stroke-linecap round;
+ transform:translate(5px, 5px);
+ stroke-dasharray:200;
+ stroke-dashoffset:200;
+ animation:rotated 4s linear infinite;
+}
+@keyframes rotate{
+ 0%{
+  transform:rotate(0deg);
+ }
+ 100%{
+ transform:rotate(360deg);
+ }
+}
+@keyframes rotated{
+ 0%,100%{
+  stroke-dashoffset:200;
+ }
+ 50%{
+  stroke-dashoffset:0;
+ }
+ 50.1%{
+ stroke-dashoffset:400;
+ }
+}
+
+</style>
+</head>
+<body>
+<section class="container">
+ <div class="password_wrapper">
+  <h1 class="title" >Password generator</h1>
+  <div class="result-box" >
+   <div class="result" >
+     <span id="result"></span>
+   </div>
+   <button class="btn-copy"  id="copy">copy</button>
+  </div><!-- result-box -->
+   <span class="error" id="error"></span>
+  <div class="options-box" >
+   <div class="option" >
+    <label for="length">Password Length</label>
+    <input type="number" id="length" min="4" max="50" value="10" class="pass_lenght">
+   </div>
+   <div class="option" >
+    <label for="lowercase">Include Lowercase letters</label>
+    <input type="checkbox" id="lowercase" checked="checked" >
+   </div>
+   <div class="option" >
+    <label for="uppercase">Include uppercase letters</label>
+    <input type="checkbox" id="uppercase" checked="checked">
+   </div>
+   <div class="option" >
+    <label for="numbers">Include numbers</label>
+    <input type="checkbox" id="numbers" checked="checked" >
+   </div>
+   <div class="option" >
+    <label for="symbols">Include symbols</label>
+    <input type="checkbox" id="symbols" checked="checked" >
+   </div>
+  </div><!-- details-box -->
+  <div class="btn-group" >
+   <button class="generator-btn"  id="generator">Generator</button>
+  <a href="https://youtube.com/shorts/my5JVO3UDes?si=tJ3yFA3QwqmMEP55" target="_blank"><button class="sub-btn" id="sub-btn">
+    
+    Help me
+  </button></a>
+  </div>
+ </div>
+</section>
+<div class="preloader" id="loader">
+ <svg>
+  <circle cx="30" cy="30" r="30">
+  </circle>
+ </svg>
+</div>
+<!-- script -->
+<script>
+ const { log } = console;
+ const result = document.getElementById('result'),
+       pass_length = document.getElementById('length'),
+       lower = document.getElementById('lowercase'),
+       upper = document.getElementById('uppercase'),
+       number = document.getElementById('numbers'),
+       symbol = document.getElementById('symbols'),
+       generator = document.getElementById('generator'),
+       copy = document.getElementById('copy'),
+       error = document.getElementById('error'),
+       loader = document.getElementById('loader');
+ // code - http://www.net-comber.com/charset.html
+ const getLowercase = () => {
+  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+ }
+ const getUppercase = () => {
+  return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+ }
+ const getNumber = () => {
+  return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+ }
+ const getSymbol = () => {
+  const symbol = "@#$&+(){}[]!?*/%^\,.";
+  return symbol[Math.floor(Math.random() * symbol.length)];
+ }
+ 
+ const randomFun = {
+ lower:getLowercase,
+ upper:getUppercase,
+ number:getNumber,
+ symbol:getSymbol
+ };
+ 
+ generator.addEventListener('click',() => {
+  error.textContent = '';
+  const length = +pass_length.value;
+  const hasLower = lower.checked;
+  const hasUpper = upper.checked;
+  const hasNumber = number.checked;
+  const hasSymbol = symbol.checked;
+  
+  result.textContent = generatorPassword(length,hasLower,hasUpper,hasNumber,hasSymbol);
+ });
+ 
+const generatorPassword = (length,lower,upper,number,symbol) => {
+  let password = '';
+  const typeCount = lower + upper + number + symbol; 
+  //log('typeCount', typeCount);
+  const typeAttr =  [{lower},{upper},{number},{symbol}].filter(item => Object.values(item)[0]);
+ // log('typeAttr',typeAttr[0]['lower'])
+  if(length === 0){
+   error.textContent = 'type password length';
+   return;
+  }else if(length > 50){
+   error.textContent = "maximum password length 50 characters";
+   return;
+  } 
+  if(typeCount <= 0){
+   error.textContent = 'select letters your password';
+  return;
+  }
+  loader.classList.add('show');
+  result.style.opacity = '0';
+  for(let i = 0; i < length; i+=typeCount){
+   typeAttr.forEach(type => {
+    const funName = Object.keys(type)[0];
+    
+    password+= randomFun[funName]();
+   });
+  }
+  setTimeout(() => {
+   loader.classList.remove('show');
+   result.style.opacity = '1';
+  },2000);
+  return password.slice(0, length);
+ }
+ 
+ copy.addEventListener('click', () => {
+  let textarea = document.createElement('textarea');
+  const passwords = result.innerText;
+  if(!passwords){
+   return;
+  }
+  textarea.value = passwords;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  textarea.remove();
+  alert('password copied to clipboard');
+ });
+</script>
+</body>
+</html>
